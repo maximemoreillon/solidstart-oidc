@@ -26,11 +26,8 @@ export default createMiddleware({ onRequest });
 Register the middleware in `app.config.ts`
 
 ```ts
-import { defineConfig } from "@solidjs/start/config";
-
-export default defineConfig({
-  middleware: "src/middleware/index.ts",
-});
+import { middleware } from "@solidjs/start/config";
+export default middleware;
 ```
 
 #### Route handlers

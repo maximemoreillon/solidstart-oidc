@@ -1,4 +1,4 @@
-import { onRequest } from "./middleware";
+import middleware from "./middleware";
 import { loginHandler, callbackHandler } from "./handlers";
-
-export { onRequest, loginHandler, callbackHandler };
+import { useUserSession } from "./session";
+export { middleware, loginHandler, callbackHandler, useUserSession };
