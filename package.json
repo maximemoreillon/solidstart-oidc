@@ -1,10 +1,11 @@
 {
-  "name": "example-bare",
+  "name": "@moreillon/solidstart-oidc",
+  "version": "0.0.1",
   "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "dev": "vinxi dev",
-    "build": "vinxi build",
-    "start": "vinxi start"
+    "build": "tsc"
   },
   "dependencies": {
     "@moreillon/oidc-auth": "^3.0.5",
@@ -16,5 +17,8 @@
   },
   "engines": {
     "node": ">=22"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
   }
 }

@@ -1,3 +1,3 @@
-import { callbaxckHandler } from "../../../../../src/apiRouteHandlers";
+import { callbackHandler } from "../../../../../src/apiRouteHandlers";
 
-export const GET = callbaxckHandler;
+export const GET = callbackHandler;

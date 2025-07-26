@@ -21,7 +21,7 @@ export async function loginHandler(event: APIEvent) {
   return redirect(authUrl);
 }
 
-export async function callbaxckHandler(event: APIEvent) {
+export async function callbackHandler(event: APIEvent) {
   const { searchParams, origin } = new URL(event.request.url);
   const redirect_uri = getRedirectUri(origin);
   const code = searchParams.get("code");
