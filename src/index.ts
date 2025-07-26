@@ -1,12 +1,11 @@
 import { SessionConfig, useSession } from "vinxi/http";
-import { redirect } from "@solidjs/router";
+import { createPkcePair } from "./pkce";
 import {
   AUTH_SESSION_SECRET,
   NODE_ENV,
   OIDC_AUTHORITY,
   OIDC_CLIENT_ID,
 } from "./config";
-import { createPkcePair } from "./pkce";
 
 export type OpenIdConfig = {
   authorization_endpoint: string;
@@ -24,8 +23,6 @@ export type verifierSessionData = {
 };
 
 export async function useUserSession() {
-  "use server";
-
   const config: SessionConfig = {
     password: AUTH_SESSION_SECRET,
     name: "soildstart-oidc-user",
@@ -38,8 +35,6 @@ export async function useUserSession() {
 }
 
 export async function useVerifierSession() {
-  "use server";
-
   const config: SessionConfig = {
     password: AUTH_SESSION_SECRET,
     name: "soildstart-oidc-verifier",
@@ -54,7 +49,7 @@ export async function useVerifierSession() {
 export async function fetchOidcConfig(): Promise<OpenIdConfig> {
   const openIdConfigUrl = `${OIDC_AUTHORITY}/.well-known/openid-configuration`;
   const response = await fetch(openIdConfigUrl);
-  // TODO: handle errors
+  if (!response.ok) throw new Error(await response.text());
   return await response.json();
 }
 
@@ -68,7 +63,6 @@ export async function generateAuthUrl(
   const authUrl = new URL(authorization_endpoint);
 
   // TODO: have scope configurable
-  // TODO: offline access
   authUrl.searchParams.append("scope", "openid profile");
   authUrl.searchParams.append("response_type", "code");
   authUrl.searchParams.append("code_challenge_method", "S256");

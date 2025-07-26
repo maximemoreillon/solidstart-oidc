@@ -6,7 +6,7 @@ import {
   fetchUser,
   useUserSession,
   generateAuthUrl,
-} from "~/oidc";
+} from ".";
 
 const getRedirectUri = (origin: string) => `${origin}/api/oauth/callback`;
 
