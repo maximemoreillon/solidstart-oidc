@@ -1,3 +1,3 @@
-import { loginHandler } from "../../../../../src/apiRouteHandlers";
+import { loginHandler } from "../../../../../src";
 
 export const GET = loginHandler;

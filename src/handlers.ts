@@ -4,9 +4,9 @@ import {
   fetchOidcConfig,
   fetchTokens,
   fetchUser,
-  useUserSession,
   generateAuthUrl,
-} from ".";
+} from "./oidc";
+import { useUserSession } from "./session";
 
 const getRedirectUri = (origin: string) => `${origin}/api/oauth/callback`;
 
@@ -42,5 +42,6 @@ export async function callbackHandler(event: APIEvent) {
 
   await userSession.update({ user });
 
-  return user;
+  // TODO: customizable
+  return redirect("/");
 }
