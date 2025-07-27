@@ -1,4 +1,5 @@
 import type { APIEvent } from "@solidjs/start/server";
+// Cannot use router otherwise Solid complains about using client-side code
 // import { redirect } from "@solidjs/router";
 import { useUserSession } from "./session.js";
 import {

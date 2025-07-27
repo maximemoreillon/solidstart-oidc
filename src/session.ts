@@ -1,5 +1,5 @@
 import { SessionConfig, useSession } from "vinxi/http";
-import { AUTH_SESSION_SECRET, NODE_ENV } from "./config.js";
+import { OIDC_SESSION_SECRET, OIDC_COOKIES_INSECURE } from "./config.js";
 
 export type UserSessionData = {
   user: any;
@@ -9,22 +9,23 @@ export type verifierSessionData = {
   verifier: string;
 };
 
-export async function useUserSession() {
-  const config: SessionConfig = {
-    password: AUTH_SESSION_SECRET,
-    name: "soildstart-oidc-user",
-  };
-  if (NODE_ENV === "development") config.cookie = { secure: false };
+const baseConfig: SessionConfig = {
+  password: OIDC_SESSION_SECRET,
+  cookie: {
+    secure: !OIDC_COOKIES_INSECURE,
+  },
+};
 
-  return await useSession<UserSessionData>(config);
+export async function useUserSession() {
+  return await useSession<UserSessionData>({
+    ...baseConfig,
+    name: "soildstart-oidc-user",
+  });
 }
 
 export async function useVerifierSession() {
-  const config: SessionConfig = {
-    password: AUTH_SESSION_SECRET,
+  return await useSession<verifierSessionData>({
+    ...baseConfig,
     name: "soildstart-oidc-verifier",
-  };
-  if (NODE_ENV === "development") config.cookie = { secure: false };
-
-  return await useSession<verifierSessionData>(config);
+  });
 }

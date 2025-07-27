@@ -71,7 +71,7 @@ export async function GET(event: APIEvent) {
 #### Environment variables
 
 ```.env
-AUTH_SESSION_SECRET=areallylongsecretthatyoushouldreplace
+OIDC_SESSION_SECRET=areallylongsecretthatyoushouldreplace
 OIDC_AUTHORITY=https://oidc.example.com
 OIDC_CLIENT_ID=yourclientid
 ```
