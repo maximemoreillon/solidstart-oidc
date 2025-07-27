@@ -16,9 +16,7 @@ export async function useUserSession() {
   };
   if (NODE_ENV === "development") config.cookie = { secure: false };
 
-  const session = await useSession<UserSessionData>(config);
-
-  return session;
+  return await useSession<UserSessionData>(config);
 }
 
 export async function useVerifierSession() {
@@ -28,7 +26,5 @@ export async function useVerifierSession() {
   };
   if (NODE_ENV === "development") config.cookie = { secure: false };
 
-  const session = await useSession<verifierSessionData>(config);
-
-  return session;
+  return await useSession<verifierSessionData>(config);
 }

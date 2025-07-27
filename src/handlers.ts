@@ -1,5 +1,5 @@
 import type { APIEvent } from "@solidjs/start/server";
-import { redirect } from "@solidjs/router";
+// import { redirect } from "@solidjs/router";
 import { useUserSession } from "./session.js";
 import {
   fetchOidcConfig,
@@ -13,12 +13,10 @@ const getRedirectUri = (origin: string) => `${origin}/api/oauth/callback`;
 export async function loginHandler(event: APIEvent) {
   const { origin } = new URL(event.request.url);
   const redirect_uri = getRedirectUri(origin);
-
   const { authorization_endpoint } = await fetchOidcConfig();
-
   const authUrl = await generateAuthUrl(authorization_endpoint, redirect_uri);
-
-  return redirect(authUrl);
+  // return redirect(authUrl);
+  return authUrl;
 }
 
 export async function callbackHandler(event: APIEvent) {
@@ -43,5 +41,5 @@ export async function callbackHandler(event: APIEvent) {
   await userSession.update({ user });
 
   // TODO: customizable
-  return redirect("/");
+  // return redirect("/");
 }

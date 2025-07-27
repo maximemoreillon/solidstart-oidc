@@ -26,8 +26,17 @@ export default createMiddleware({ onRequest });
 Register the middleware in `app.config.ts`
 
 ```ts
-import { middleware } from "@solidjs/start/config";
-export default middleware;
+import { createMiddleware } from "@solidjs/start/middleware";
+import { requireLogin } from "@moreillon/solidstart-oidc";
+import { type FetchEvent } from "@solidjs/start/server";
+import { redirect } from "@solidjs/router";
+
+export default createMiddleware({
+  async onRequest(event: FetchEvent) {
+    const url = await requireLogin(event);
+    if (url) redirect(url);
+  },
+});
 ```
 
 #### Route handlers
@@ -36,14 +45,26 @@ export default middleware;
 
 ```ts
 import { loginHandler } from "@moreillon/solidstart-oidc";
-export const GET = loginHandler;
+import { redirect } from "@solidjs/router";
+import type { APIEvent } from "@solidjs/start/server";
+
+export async function GET(event: APIEvent) {
+  const href = await loginHandler(event);
+  return redirect(href);
+}
 ```
 
 `src/routes/api/oauth/callback.ts`
 
 ```ts
 import { callbackHandler } from "@moreillon/solidstart-oidc";
-export const GET = callbackHandler;
+import { redirect } from "@solidjs/router";
+import type { APIEvent } from "@solidjs/start/server";
+
+export async function GET(event: APIEvent) {
+  await callbackHandler(event);
+  return redirect("/");
+}
 ```
 
 #### Environment variables

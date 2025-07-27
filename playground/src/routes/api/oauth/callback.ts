@@ -1,3 +1,8 @@
-import { callbackHandler } from "../../../../../src";
+import { callbackHandler } from "@moreillon/solidstart-oidc";
+import { redirect } from "@solidjs/router";
+import type { APIEvent } from "@solidjs/start/server";
 
-export const GET = callbackHandler;
+export async function GET(event: APIEvent) {
+  await callbackHandler(event);
+  return redirect("/");
+}
