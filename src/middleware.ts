@@ -1,9 +1,8 @@
+import { type FetchEvent } from "@solidjs/start/server";
 import { redirect } from "@solidjs/router";
-import { useUserSession } from "./session";
-import { FetchEvent } from "@solidjs/start/server";
-import { createMiddleware } from "@solidjs/start/middleware";
+import { useUserSession } from "./session.js";
 
-export async function onRequest(event: FetchEvent) {
+export async function requireLogin(event: FetchEvent) {
   const { pathname } = new URL(event.request.url);
 
   if (pathname === "/api/oauth/callback") return;
@@ -13,7 +12,3 @@ export async function onRequest(event: FetchEvent) {
   const userSession = await useUserSession();
   if (!userSession.data?.user) return redirect("/api/oauth/login");
 }
-
-export default createMiddleware({
-  onRequest,
-});

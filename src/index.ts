@@ -1,4 +1,4 @@
-import middleware from "./middleware";
-import { loginHandler, callbackHandler } from "./handlers";
-import { useUserSession } from "./session";
-export { middleware, loginHandler, callbackHandler, useUserSession };
+// NOTE: the .js extensions are intensional for budling
+export * from "./middleware.js";
+export * from "./handlers.js";
+export * from "./session.js";

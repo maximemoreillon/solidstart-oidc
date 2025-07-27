@@ -1,12 +1,12 @@
 import type { APIEvent } from "@solidjs/start/server";
 import { redirect } from "@solidjs/router";
+import { useUserSession } from "./session.js";
 import {
   fetchOidcConfig,
   fetchTokens,
   fetchUser,
   generateAuthUrl,
-} from "./oidc";
-import { useUserSession } from "./session";
+} from "./oidc.js";
 
 const getRedirectUri = (origin: string) => `${origin}/api/oauth/callback`;
 

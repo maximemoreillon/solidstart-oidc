@@ -1,5 +1,5 @@
 import { SessionConfig, useSession } from "vinxi/http";
-import { AUTH_SESSION_SECRET, NODE_ENV } from "./config";
+import { AUTH_SESSION_SECRET, NODE_ENV } from "./config.js";
 
 export type UserSessionData = {
   user: any;

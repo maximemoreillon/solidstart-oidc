@@ -1,6 +1,6 @@
-import { createPkcePair } from "./pkce";
-import { OIDC_AUTHORITY, OIDC_CLIENT_ID } from "./config";
-import { useVerifierSession } from "./session";
+import { createPkcePair } from "./pkce.js";
+import { OIDC_AUTHORITY, OIDC_CLIENT_ID } from "./config.js";
+import { useVerifierSession } from "./session.js";
 
 export type OpenIdConfig = {
   authorization_endpoint: string;
