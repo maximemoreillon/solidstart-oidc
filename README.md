@@ -12,18 +12,9 @@ npm i @moreillon/solidstart-oidc
 
 ### Setup
 
-#### Middleare
+#### Middleware
 
-Create a middleware file `src/middleware/index.ts` in `src` with the following content:
-
-```ts
-import { createMiddleware } from "@solidjs/start/middleware";
-import { onRequest } from "@moreillon/solidstart-oidc";
-
-export default createMiddleware({ onRequest });
-```
-
-Register the middleware in `app.config.ts`
+Create a middleware file `src/middleware/oidc.ts` with the following content:
 
 ```ts
 import { createMiddleware } from "@solidjs/start/middleware";
@@ -36,6 +27,16 @@ export default createMiddleware({
     const url = await requireLogin(event);
     if (url) redirect(url);
   },
+});
+```
+
+Register the middleware in `app.config.ts`
+
+```ts
+import { defineConfig } from "@solidjs/start/config";
+
+export default defineConfig({
+  middleware: "./src/middleware/oidc.ts",
 });
 ```
 
